@@ -1,0 +1,1 @@
+You can support me by starring the [github repository](https://github.com/FlyingPig525/AutoGroupOptions)

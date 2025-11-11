@@ -1,0 +1,17 @@
+{
+	"geode": "4.9.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "flyingpig525.autogroupoptions",
+	"name": "Auto Group Options",
+	"version": "v1.0.0",
+	"developer": "FlyingPig525",
+	"description": "Automatically sets the group extras options of objects placed",
+	"dependencies": {
+		"geode.node-ids": ">=v1.20.0"
+	}
+}
