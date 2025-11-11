@@ -11,5 +11,18 @@
 	"version": "v1.0.0",
 	"developer": "FlyingPig525",
 	"description": "Automatically sets the group extras options of objects placed",
-	"dependencies": {}
+	"dependencies": {},
+	"links": {
+		"source": "https://github.com/FlyingPig525/AutoGroupOptions"
+	},
+	"issues": {
+		"info": "Github Issues Page",
+		"url": "https://github.com/FlyingPig525/AutoGroupOptions/issues"
+	},
+	"tags": [
+		"editor",
+		"offline",
+		"enhancement",
+		"utility"
+	]
 }
