@@ -33,7 +33,11 @@ struct AutoOptionsButton : Modify<AutoOptionsButton, LevelSettingsLayer> {
 
     static GameObject *getOptionsObject() {
         auto editor = LevelEditorLayer::get();
+        if (editor == nullptr) return nullptr;
         auto objs = editor->objectsAtPosition(OBJ_POS);
+        if (objs == nullptr) {
+            return nullptr;
+        }
         GameObject *optObject = nullptr;
         if (objs->count() < 1) {
             return nullptr;
@@ -49,6 +53,7 @@ struct AutoOptionsButton : Modify<AutoOptionsButton, LevelSettingsLayer> {
 
     static GameObject *getAndCreateOptionsObject() {
         auto editor = LevelEditorLayer::get();
+        if (editor == nullptr) return nullptr;
         auto opt = getOptionsObject();
         if (opt == nullptr) {
             log::info("Options object not found in level, creating");
