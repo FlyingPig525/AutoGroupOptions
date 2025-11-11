@@ -11,7 +11,5 @@
 	"version": "v1.0.0",
 	"developer": "FlyingPig525",
 	"description": "Automatically sets the group extras options of objects placed",
-	"dependencies": {
-		"geode.node-ids": ">=v1.20.0"
-	}
+	"dependencies": {}
 }
