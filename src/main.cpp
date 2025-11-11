@@ -9,11 +9,10 @@ using namespace geode::prelude;
 
 #include <Geode/modify/LevelSettingsLayer.hpp>
 struct AutoOptionsButton : Modify<AutoOptionsButton, LevelSettingsLayer> {
-
     bool init(LevelSettingsObject* settings, LevelEditorLayer* layer) {
         if (!LevelSettingsLayer::init(settings, layer)) return false;
 
-        if (auto optButton = dynamic_cast<CCMenuItemSpriteExtra*>(m_buttonMenu->getChildren()->lastObject())) {
+        if (auto optButton = typeinfo_cast<CCMenuItemSpriteExtra*>(m_buttonMenu->getChildren()->lastObject())) {
             auto sprite = ButtonSprite::create("Auto Object Options");
             sprite->setScale(0.65f);
             auto button = CCMenuItemSpriteExtra::create(sprite, this, menu_selector(AutoOptionsButton::onAutoOptions));
@@ -31,18 +30,18 @@ struct AutoOptionsButton : Modify<AutoOptionsButton, LevelSettingsLayer> {
         SetupObjectOptionsPopup::create(optObject, nullptr, nullptr)->show();
     }
 
-    static GameObject *getOptionsObject() {
+    static OBJ_TYPE *getOptionsObject() {
         auto editor = LevelEditorLayer::get();
         if (editor == nullptr) return nullptr;
         auto objs = editor->objectsAtPosition(OBJ_POS);
         if (objs == nullptr) {
             return nullptr;
         }
-        GameObject *optObject = nullptr;
+        OBJ_TYPE *optObject = nullptr;
         if (objs->count() < 1) {
             return nullptr;
         } else {
-            optObject = dynamic_cast<GameObject*>(objs->objectAtIndex(0));
+            optObject = typeinfo_cast<OBJ_TYPE*>(objs->objectAtIndex(0));
             if (optObject == nullptr) {
                 log::error("Could not get options object from CCArray");
                 return nullptr;
@@ -51,13 +50,13 @@ struct AutoOptionsButton : Modify<AutoOptionsButton, LevelSettingsLayer> {
         return optObject;
     }
 
-    static GameObject *getAndCreateOptionsObject() {
+    static OBJ_TYPE *getAndCreateOptionsObject() {
         auto editor = LevelEditorLayer::get();
         if (editor == nullptr) return nullptr;
         auto opt = getOptionsObject();
         if (opt == nullptr) {
             log::info("Options object not found in level, creating");
-            return editor->createObject(OBJ_ID, OBJ_POS, false);
+            return typeinfo_cast<OBJ_TYPE*>(editor->createObject(OBJ_ID, OBJ_POS, false));
         }
         return opt;
     }
@@ -68,7 +67,7 @@ struct ObjectOptionsPopupSetHide : Modify<ObjectOptionsPopupSetHide, SetupObject
     void onClose(cocos2d::CCObject* sender) override {
         SetupObjectOptionsPopup::onClose(sender);
         if (m_gameObject != nullptr && m_gameObject->getPosition().equals(OBJ_POS)) {
-            if (auto camera = dynamic_cast<OBJ_TYPE *>(m_gameObject)) {
+            if (auto camera = typeinfo_cast<OBJ_TYPE *>(m_gameObject)) {
                 log::debug("Popup closed was for settings object, hiding");
                 m_gameObject->m_isHide = true;
             }
