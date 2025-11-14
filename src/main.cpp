@@ -12,13 +12,11 @@ struct AutoOptionsButton : Modify<AutoOptionsButton, LevelSettingsLayer> {
     bool init(LevelSettingsObject* settings, LevelEditorLayer* layer) {
         if (!LevelSettingsLayer::init(settings, layer)) return false;
 
-        if (auto optButton = typeinfo_cast<CCMenuItemSpriteExtra*>(m_buttonMenu->getChildren()->lastObject())) {
-            auto sprite = ButtonSprite::create("Auto Object Options");
-            sprite->setScale(0.65f);
-            auto button = CCMenuItemSpriteExtra::create(sprite, this, menu_selector(AutoOptionsButton::onAutoOptions));
-            button->setPosition(CCPoint(-126.0f, -130.0f));
-            m_buttonMenu->addChild(button);
-        }
+        auto sprite = ButtonSprite::create("Auto Object Options");
+        sprite->setScale(0.65f);
+        auto button = CCMenuItemSpriteExtra::create(sprite, this, menu_selector(AutoOptionsButton::onAutoOptions));
+        button->setPosition(CCPoint(-126.0f, -130.0f));
+        m_buttonMenu->addChild(button);
         return true;
     }
 
@@ -67,7 +65,7 @@ struct ObjectOptionsPopupSetHide : Modify<ObjectOptionsPopupSetHide, SetupObject
     void onClose(cocos2d::CCObject* sender) override {
         SetupObjectOptionsPopup::onClose(sender);
         if (m_gameObject != nullptr && m_gameObject->getPosition().equals(OBJ_POS)) {
-            if (auto camera = typeinfo_cast<OBJ_TYPE *>(m_gameObject)) {
+            if (auto camera = typeinfo_cast<OBJ_TYPE *>(m_gameObject); camera != nullptr) {
                 log::debug("Popup closed was for settings object, hiding");
                 m_gameObject->m_isHide = true;
             }
@@ -81,25 +79,25 @@ struct GameObjectConstructor : Modify<GameObjectConstructor, GameObject> {
         GameObject::customSetup();
         auto opt = AutoOptionsButton::getOptionsObject();
         if (opt == nullptr) return;
-        m_isDontFade = opt->m_isDontFade;
-        m_isDontEnter = opt->m_isDontEnter;
-        m_hasNoEffects = opt->m_hasNoEffects;
-        m_hasGroupParent = opt->m_hasGroupParent;
-        m_hasAreaParent = opt->m_hasAreaParent;
-        m_isDontBoostY = opt->m_isDontBoostY;
-        m_isDontBoostX = opt->m_isDontBoostX;
-        m_isHighDetail = opt->m_isHighDetail;
-        m_isNoTouch = opt->m_isNoTouch;
-        m_isPassable = opt->m_isPassable;
-        m_isNonStickX = opt->m_isNonStickX;
-        m_isNonStickY = opt->m_isNonStickY;
-        m_isExtraSticky = opt->m_isExtraSticky;
+        m_isDontFade           = opt->m_isDontFade;
+        m_isDontEnter          = opt->m_isDontEnter;
+        m_hasNoEffects         = opt->m_hasNoEffects;
+        m_hasGroupParent       = opt->m_hasGroupParent;
+        m_hasAreaParent        = opt->m_hasAreaParent;
+        m_isDontBoostY         = opt->m_isDontBoostY;
+        m_isDontBoostX         = opt->m_isDontBoostX;
+        m_isHighDetail         = opt->m_isHighDetail;
+        m_isNoTouch            = opt->m_isNoTouch;
+        m_isPassable           = opt->m_isPassable;
+        m_isNonStickX          = opt->m_isNonStickX;
+        m_isNonStickY          = opt->m_isNonStickY;
+        m_isExtraSticky        = opt->m_isExtraSticky;
         m_hasExtendedCollision = opt->m_hasExtendedCollision;
-        m_isIceBlock = opt->m_isIceBlock;
-        m_isGripSlope = opt->m_isGripSlope;
-        m_hasNoGlow = opt->m_hasNoGlow;
-        m_hasNoParticles = opt->m_hasNoParticles;
-        m_isScaleStick = opt->m_isScaleStick;
-        m_hasNoAudioScale = opt->m_hasNoAudioScale;
+        m_isIceBlock           = opt->m_isIceBlock;
+        m_isGripSlope          = opt->m_isGripSlope;
+        m_hasNoGlow            = opt->m_hasNoGlow;
+        m_hasNoParticles       = opt->m_hasNoParticles;
+        m_isScaleStick         = opt->m_isScaleStick;
+        m_hasNoAudioScale      = opt->m_hasNoAudioScale;
     }
 };
