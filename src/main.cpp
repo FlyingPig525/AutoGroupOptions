@@ -25,7 +25,9 @@ struct AutoOptionsButton : Modify<AutoOptionsButton, LevelSettingsLayer> {
         GameObject *optObject = getAndCreateOptionsObject();
         if (optObject == nullptr) return;
         optObject->m_isHide = false;
-        SetupObjectOptionsPopup::create(optObject, nullptr, nullptr)->show();
+        auto popup = SetupObjectOptionsPopup::create(optObject, nullptr, nullptr);
+        if (popup == nullptr) return;
+        popup->show();
     }
 
     static OBJ_TYPE *getOptionsObject() {
@@ -54,7 +56,9 @@ struct AutoOptionsButton : Modify<AutoOptionsButton, LevelSettingsLayer> {
         auto opt = getOptionsObject();
         if (opt == nullptr) {
             log::info("Options object not found in level, creating");
-            return typeinfo_cast<OBJ_TYPE*>(editor->createObject(OBJ_ID, OBJ_POS, false));
+            auto obj = editor->createObject(OBJ_ID, OBJ_POS, false);
+            if (obj == nullptr) return nullptr;
+            return typeinfo_cast<OBJ_TYPE*>(obj);
         }
         return opt;
     }
