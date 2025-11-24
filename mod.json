@@ -8,7 +8,7 @@
 	},
 	"id": "flyingpig525.autogroupoptions",
 	"name": "Auto Group Options",
-	"version": "v1.0.2",
+	"version": "v1.0.3",
 	"developer": "FlyingPig525",
 	"description": "Automatically sets the group extras options of objects placed",
 	"dependencies": {},
